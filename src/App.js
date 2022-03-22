@@ -1,4 +1,4 @@
-import { useEffect, useState,useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './App.css';
 
 function App() {
@@ -8,12 +8,14 @@ function App() {
   const [result, setResult] = useState(0);
   const memory = useRef(0);
 
+  const [resultsHistory, setResultsHistory] = useState([]);
+
   function changeFirstNumberHandler(event) {
-    setFirstNumber(event.target.value);
+    setFirstNumber(parseFloat(event.target.value));
   }
 
   function changeSecondNumberHandler(event) {
-    setSecondNumber(event.target.value);
+    setSecondNumber(parseFloat(event.target.value));
   }
 
   useEffect(
@@ -24,34 +26,37 @@ function App() {
   )
 
   function addHandler() {
-    const result = parseFloat(firstNumber) + parseFloat(secondNumber);
+    const result = firstNumber + secondNumber;
     setResult(result);
   }
 
   function restHandler() {
-    const result = parseFloat(firstNumber) - parseFloat(secondNumber);
+    const result = firstNumber - secondNumber;
     setResult(result);
   }
+  
   function multiplyHandler() {
-    const result = parseFloat(firstNumber) * parseFloat(secondNumber);
+    const result = firstNumber * secondNumber;
     setResult(result);
-  }
-  function divideHandler() {
-    const result = parseFloat(firstNumber) / parseFloat(secondNumber);
-    setResult(result);
-  }
-  function deleteHandler() {
-    setFirstNumber("");
-    setSecondNumber("");
-    setResult("");
   }
 
-  function MHandler(){
-    memory.current=result;
+  function divideHandler() {
+    const result = firstNumber / secondNumber;
+    setResult(result);
+  }
+
+  function deleteHandler() {
+    setFirstNumber(0);
+    setSecondNumber(0);
+    setResult(0);
+  }
+
+  function MHandler() {
+    memory.current = result;
     console.log(memory);
   }
 
-  function MRHandler(){
+  function MRHandler() {
     setFirstNumber(memory.current);
   }
 
