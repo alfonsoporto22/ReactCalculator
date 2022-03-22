@@ -1,16 +1,19 @@
-import { useEffect, useState,useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
-function History (results) {
 
-    let liArray[]=results.map;
+function History({ results }) {
+
+    const liArray = results.map(
+        element => <li>{element}</li>
+    )
 
 
     return (
-        <ol>
-
-        </ol>
+        <ul>
+            {liArray}
+        </ul>
     );
-    
+
 }
 
 export default History;

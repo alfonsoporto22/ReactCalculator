@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import './App.css';
+import History from './components/history/History.jsx';
 
 function App() {
   //Siempre que declaro un state se almacenan estos 2 nombres: uno para almacenar y otro para cambiar
@@ -25,30 +26,46 @@ function App() {
     }
   )
 
+  useEffect(
+    ()=>{
+        setResultsHistory([...resultsHistory,result]);
+    },
+    [result]
+)
+
+
   function addHandler() {
     const result = firstNumber + secondNumber;
     setResult(result);
+    setFirstNumber(result);
   }
 
   function restHandler() {
     const result = firstNumber - secondNumber;
     setResult(result);
+    setFirstNumber(result);
   }
-  
+
   function multiplyHandler() {
     const result = firstNumber * secondNumber;
     setResult(result);
+    setFirstNumber(result);
   }
 
   function divideHandler() {
     const result = firstNumber / secondNumber;
     setResult(result);
+    setFirstNumber(result);
   }
 
   function deleteHandler() {
     setFirstNumber(0);
     setSecondNumber(0);
     setResult(0);
+  }
+
+  function deleteHistory(){
+    setResultsHistory([""]);
   }
 
   function MHandler() {
@@ -74,6 +91,9 @@ function App() {
       <button onClick={deleteHandler}>C</button>
       <button onClick={MHandler}>M+</button>
       <button onClick={MRHandler}>MR</button>
+      <button onClick={deleteHistory}>Borrar historial</button>
+      <h2>History</h2>
+      <History results={resultsHistory}/>
     </>
   );
 }
