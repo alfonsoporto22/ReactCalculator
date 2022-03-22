@@ -39,6 +39,11 @@ function App() {
     result=parseFloat(firstNumber)/parseFloat(secondNumber);
     setResult(result);
   }
+  function deleteHandler () {
+    setFirstNumber("");
+    setSecondNumber("");
+    setResult("");
+  }
 
   return (
     <>
@@ -51,6 +56,7 @@ function App() {
       <button onClick={restHandler }>restar</button>
       <button onClick={multiplyHandler }>multiplicar</button>
       <button onClick={divideHandler }>dividir</button>
+      <button onClick={deleteHandler }>C</button>
     </>
   );
 }
