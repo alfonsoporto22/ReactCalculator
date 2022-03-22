@@ -1,62 +1,74 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import './App.css';
 
 function App() {
-  const [ firstNumber, setFirstNumber ] = useState(0);
-  const [ secondNumber, setSecondNumber ] = useState(0);
-  let [ result, setResult ] = useState(0);
+  //Siempre que declaro un state se almacenan estos 2 nombres: uno para almacenar y otro para cambiar
+  const [firstNumber, setFirstNumber] = useState("");
+  const [secondNumber, setSecondNumber] = useState("");
+  const [result, setResult] = useState(0);
+  const memory = useRef(0);
 
-
-  function changeFirstNumberHandler (event) {
+  function changeFirstNumberHandler(event) {
     setFirstNumber(event.target.value);
   }
 
-  function changeSecondNumberHandler (event) {
+  function changeSecondNumberHandler(event) {
     setSecondNumber(event.target.value);
   }
 
   useEffect(
-    ()=>{
+    () => {
       console.log("firstNumber state:", firstNumber);
       console.log("secondNumber state:", secondNumber);
     }
   )
 
-  function addHandler () {
-    result=parseFloat(firstNumber)+parseFloat(secondNumber);
+  function addHandler() {
+    const result = parseFloat(firstNumber) + parseFloat(secondNumber);
     setResult(result);
   }
 
-  function restHandler () {
-    result=parseFloat(firstNumber)-parseFloat(secondNumber);
+  function restHandler() {
+    const result = parseFloat(firstNumber) - parseFloat(secondNumber);
     setResult(result);
   }
-  function multiplyHandler () {
-    result=parseFloat(firstNumber)*parseFloat(secondNumber);
+  function multiplyHandler() {
+    const result = parseFloat(firstNumber) * parseFloat(secondNumber);
     setResult(result);
   }
-  function divideHandler () {
-    result=parseFloat(firstNumber)/parseFloat(secondNumber);
+  function divideHandler() {
+    const result = parseFloat(firstNumber) / parseFloat(secondNumber);
     setResult(result);
   }
-  function deleteHandler () {
+  function deleteHandler() {
     setFirstNumber("");
     setSecondNumber("");
     setResult("");
   }
 
+  function MHandler(){
+    memory.current=result;
+    console.log(memory);
+  }
+
+  function MRHandler(){
+    setFirstNumber(memory.current);
+  }
+
   return (
     <>
       <h1>Calculadora</h1>
-      <input type="text" value={firstNumber} onChange={changeFirstNumberHandler}/><br/>
-      <input type="text" value={secondNumber} onChange={changeSecondNumberHandler}/>
+      <input type="text" value={firstNumber} onChange={changeFirstNumberHandler} /><br />
+      <input type="text" value={secondNumber} onChange={changeSecondNumberHandler} />
 
       <p>{result}</p>
-      <button onClick={addHandler }>sumar</button>
-      <button onClick={restHandler }>restar</button>
-      <button onClick={multiplyHandler }>multiplicar</button>
-      <button onClick={divideHandler }>dividir</button>
-      <button onClick={deleteHandler }>C</button>
+      <button onClick={addHandler}>sumar</button>
+      <button onClick={restHandler}>restar</button>
+      <button onClick={multiplyHandler}>multiplicar</button>
+      <button onClick={divideHandler}>dividir</button>
+      <button onClick={deleteHandler}>C</button>
+      <button onClick={MHandler}>M+</button>
+      <button onClick={MRHandler}>MR</button>
     </>
   );
 }
