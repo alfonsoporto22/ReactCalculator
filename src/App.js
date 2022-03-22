@@ -6,7 +6,7 @@ function App() {
   //Siempre que declaro un state se almacenan estos 2 nombres: uno para almacenar y otro para cambiar
   const [firstNumber, setFirstNumber] = useState("");
   const [secondNumber, setSecondNumber] = useState("");
-  const [result, setResult] = useState(0);
+  const [result, setResult] = useState(null);
   const memory = useRef(0);
 
   const [resultsHistory, setResultsHistory] = useState([]);
@@ -26,9 +26,17 @@ function App() {
     }
   )
 
+  //Cada vez que cambia result, se mete en el array resultsHistory los result
   useEffect(
     ()=>{
-        setResultsHistory([...resultsHistory,result]);
+      //Dispersión
+        //setResultsHistory([...resultsHistory,result]);
+
+        //La dispersión es este proceso:
+        const resultsHistory2=Array.from(resultsHistory);
+        resultsHistory2.push(result);
+        setResultsHistory(resultsHistory2);
+        
     },
     [result]
 )
